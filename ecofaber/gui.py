@@ -110,15 +110,15 @@ class ToolBar(QtWidgets.QToolBar):
         self.addSeparator()
         self.addAct('Close', 'close.png', self.parent.closeEvent)
 
+    def getIconPath(self, icon):
+        return pathlib.Path(__file__).parent / f"icons/{icon}"
+
     def setIcon(self, act, icon):
-        icon = pathlib.Path(__file__).parent / f"icons/{icon}"
-        icon = QtGui.QIcon(str(icon))
+        icon = QtGui.QIcon(str(self.getIconPath(icon)))
         self.act[act].setIcon(icon)
 
     def addAct(self, name, icon, conn):
-        icon = pathlib.Path(__file__).parent / f"icons/{icon}"
-        print(str(icon))
-        icon = QtGui.QIcon(str(icon))
+        icon = QtGui.QIcon(str(self.getIconPath(icon)))
         act = QtWidgets.QAction(icon, name, self)
         act.triggered.connect(conn)
         self.act[name] = act
@@ -140,7 +140,6 @@ class ToolBar(QtWidgets.QToolBar):
 
 
 class MainWindow(QtWidgets.QMainWindow):
-
     def __init__(self, modelClass, filePath=None):
         super().__init__()
 
@@ -150,7 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.state = 'pause'
 
         self.resize(800, 500)
-        self.setWindowTitle('EcoFaber')
+        self.setWindowTitle('Ecofaber')
 
         self.glWidget = rendering.GLWidget(self)
         self.initGUI()
