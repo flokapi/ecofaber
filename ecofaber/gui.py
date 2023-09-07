@@ -145,7 +145,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.modelClass = modelClass
         self.filePath = filePath
-        self.model = None
+        self.model = modelClass({})
         self.state = 'pause'
 
         self.resize(800, 500)
@@ -194,9 +194,11 @@ class MainWindow(QtWidgets.QMainWindow):
     def reset(self):
         if self.filePath:
             data = utils.loadJson(self.filePath)
-            self.model = self.modelClass(data)
-            self.selectElem.setElem(None)
-            self.updateView()
+        else:
+            data = {}
+        self.model = self.modelClass(data)
+        self.selectElem.setElem(None)
+        self.updateView()
 
     def load(self, filePath=None):
         if filePath == None:

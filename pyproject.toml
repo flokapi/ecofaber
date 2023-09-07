@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ecofaber"
-version = "0.0.1"
+version = "0.0.3"
 description = "Perform micro/macro 3D economic simulations"
 authors = [
     { name = "flokapi" },
@@ -33,7 +33,9 @@ classifiers = [
 dependencies = [
     "pyqt5",
     "PyOpenGL",
+    "numpy",
     "numpy-stl",
+    "pyyaml",
 ]
 
 [tool.setuptools.packages.find]
